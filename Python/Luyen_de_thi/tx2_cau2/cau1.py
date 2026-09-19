@@ -1,61 +1,96 @@
-class HinhTuGiac:
+class TuGiac:
     def __init__(self, a, b, c, d):
-        self.a = a 
+        self.a = a
         self.b = b
         self.c = c
         self.d = d
-    def tinh_chu_vi(self):      # tinh chu vi hinh tren
-        return (self.a + self.b + self.c + self.d)
-    def find_max(self):         # tim canh lon nhat 
+
+    def chu_vi(self):
+        return self.a + self.b + self.c + self.d
+
+    def canh_max(self):
         return max(self.a, self.b, self.c, self.d)
-    
-# ======================================================
+
+# ==========================================================
 while True:
     try:
-        n = int(input("Nhap so luong hinh tu giac: "))
+        n = int(input("Nhap so luong tu giac"))
         if n > 0:
             break
         else:
-            print("Nhap so luong > 0 !")
+            print("Vui long nhap so luong > 0 !")
     except ValueError:
-        print("Vui long nhap chinh xac !")
+        print("Vui long nhap so nguyen !")
 
-# ======================================================
-ds_tugiac = []
+ds_tg = []
+print("\n======= Nhap thong tin tu giac =======")
 for i in range(n):
-    canh = []
-    print(f"\n=== Nhap canh tu giac {i+1} ===")
-    for ten in ["a", "b", "c", "d"]:
-        while True:
-            try:
-                canh.append(float(input(f"Nhap canh {ten} cua tu giac thu {i+1} = ")))
+    print(f"\nNhap canh cua tu giac thu {i+1}: ")
+
+    while True:
+        try:
+            a = float(input("Nhap canh a: "))
+            if a > 0:
                 break
-            except ValueError:
-                print("Vui long nhap chinh xac !")
+            else:
+                print("Nhap canh > 0 !")
+        except ValueError:
+            print("Vui long nhap so !")
 
-    a, b, c, d = canh
-    tugiac = HinhTuGiac(a, b, c, d)
-    ds_tugiac.append(tugiac)
+    while True:
+        try:
+            b = float(input("Nhap canh b: "))
+            if b > 0:
+                break
+            else:
+                print("Nhap canh > 0 !")
+        except ValueError:
+            print("Vui long nhap so !")
 
-# ======================================================
-# in chu vi va tim canh 
-print("\n==== Danh sach tu giac ====")
-for i, tugiac in enumerate(ds_tugiac):
-    print(f"\nTu giac {i + 1}:")
-    print("a =", tugiac.a)
-    print("b =", tugiac.b)
-    print("c =", tugiac.c)
-    print("d =", tugiac.d)
+    while True:
+        try:
+            c = float(input("Nhap canh c: "))
+            if c > 0:
+                break
+            else:
+                print("Nhap canh > 0 !")
+        except ValueError:
+            print("Vui long nhap so !")   
 
-    print("=> Chu vi =", tugiac.tinh_chu_vi())
-    print("=> Canh lon nhat =", tugiac.find_max())
+    while True:
+        try:
+            d = float(input("Nhap canh d: "))
+            if d > 0:
+                break
+            else:
+                print("Nhap canh > 0 !")
+        except ValueError:
+            print("Vui long nhap so !")
 
-# in chu vi min trong list tu giác
-tugiac_min = ds_tugiac[0]
-for tugiac in ds_tugiac:
-    if tugiac.tinh_chu_vi() < tugiac_min.tinh_chu_vi():
-        tugiac_min = tugiac
+    # add list
+    ds_tg.append(TuGiac(a, b, c, d))
 
-print("\n========== HINH CO CHU VI NHO NHAT ==========")
-print("Chu vi nho nhat =", tugiac_min.tinh_chu_vi())
-print("Cac canh:",tugiac_min.a, tugiac_min.b, tugiac_min.c, tugiac_min.d)
+# ==========================================================
+print("\n======= Danh sach tu giac =======")
+for i, tg in enumerate(ds_tg):
+    print(f"\nTu giac thu {i+1}: ")
+    print("Canh a: ", tg.a)
+    print("Canh b: ", tg.b)
+    print("Canh c: ", tg.c)
+    print("Canh d: ", tg.d)
+    print("Chu vi: ", tg.chu_vi())
+    print("Canh lon nhat: ", tg.canh_max())
+
+# Canh lon nhat cua moi tu giac
+print("\n======= Canh lon nhat cua moi tu giac =======")
+for i, tg in enumerate(ds_tg):
+    print(f"Tu giac thu {i+1}: {tg.canh_max()}")
+
+# Hinh co chu vi nho nhat
+tg_min = min(ds_tg, key = lambda tg: tg.chu_vi())
+print("\n======= Tu giac co chu vi nho nhat =======")
+print("Canh a: ", tg_min.a)
+print("Canh b: ", tg_min.b)
+print("Canh c: ", tg_min.c)
+print("Canh d: ", tg_min.d)
+print("Chu vi: ", tg_min.chu_vi())
